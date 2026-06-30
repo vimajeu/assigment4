@@ -8,11 +8,12 @@ include_directories(.)
 add_executable(assigment4
         CheckListLine.cpp
         CheckListLine.h
-        Line.cpp
         Line.h
         TextEditor.cpp
         TextEditor.h
         TextLine.cpp
         TextLine.h
         ContactInfoLine.cpp
-        ContactInfoLine.h)
+        ContactInfoLine.h
+        Text.cpp
+        Text.h)

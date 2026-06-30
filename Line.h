@@ -7,9 +7,18 @@
 #include <vector>
 #include <string>
 
+enum class LineType {
+    Text,
+    ContactInfo,
+    CheckList
+};
 class Line {
 public:
     virtual void print() const = 0;
+    virtual void serialize(std::vector<uint8_t>& out) const;
+    virtual int getLength() const;
+    virtual Line* clone() const;
+    virtual LineType getType() const;
     virtual ~Line() {}
 };
 
