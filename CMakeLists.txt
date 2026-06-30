@@ -13,4 +13,6 @@ add_executable(assigment4
         TextEditor.cpp
         TextEditor.h
         TextLine.cpp
-        TextLine.h)
+        TextLine.h
+        ContactInfoLine.cpp
+        ContactInfoLine.h)
