@@ -14,9 +14,14 @@ class ChecklistLine : public Line {
     bool checked;
 public:
     ChecklistLine(const std::string& i, bool c) : item(i), checked(c) {}
+    void toggle();
     void print() const override {
         std::cout << "[ " << (checked ? "x" : " ") << " ] " << item << std::endl;
     }
+    void serialize(std::vector<uint8_t>& out) const override;
+    Line* clone() const override;
+    LineType getType() const override;
+    static ChecklistLine* deserialize(const std::vector<uint8_t>& in, size_t& offset);
 };
 
 #endif //ASSIGMENT4_CHECKLISTLINE_H

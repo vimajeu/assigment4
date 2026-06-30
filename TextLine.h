@@ -25,7 +25,6 @@ public:
         std::cout << "Text: " << text << std::endl;
     }
     void serialize(std::vector<uint8_t>& out) const override;
-    int getLength() const override;
     Line* clone() const override;
     LineType getType() const override;
     static TextLine* deserialize(const std::vector<uint8_t>& in, size_t& offset);

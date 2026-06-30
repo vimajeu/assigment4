@@ -65,9 +65,6 @@ void TextLine::serialize(std::vector<uint8_t>& out) const {
         out.push_back(static_cast<uint8_t>(c));
     }
 }
-int TextLine::getLength() const {
-    return text.size();
-}
 
 Line* TextLine::clone() const {
     return new TextLine(text);
