@@ -189,6 +189,7 @@ void Text::execute_command(Command* c) {
     for (auto command : redoStack) {
         delete command;
     }
+    redoStack.clear();
 }
 
 void Text::undo() {

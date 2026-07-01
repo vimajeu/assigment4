@@ -24,6 +24,7 @@ public:
     }
     void redo() override;
     void undo() override;
+    ~AddLine() override {delete line;}
 };
 
 class InsertLine : public Command {
@@ -35,18 +36,19 @@ public:
     }
     void redo() override;
     void undo() override;
+    ~InsertLine() override {delete line;}
 };
 
 class DeleteLine : public Command {
     Text* owner;
-    Line* line;
+    Line* line = nullptr;
     int index;
 public:
     DeleteLine(Text* t, int i) : owner(t), index(i) {
-        line = owner->get_line_at(index)->clone();
     }
     void redo() override;
     void undo() override;
+    ~DeleteLine() override {delete line;}
 };
 
 class AppendTextLine : public Command {

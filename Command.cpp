@@ -26,6 +26,8 @@ void DeleteLine::undo() {
 }
 
 void DeleteLine::redo() {
+    delete line;
+    line = owner->get_line_at(index);
     owner->delete_line(index);
 }
 

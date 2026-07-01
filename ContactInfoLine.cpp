@@ -10,15 +10,26 @@ LineType ContactInfoLine::getType() const {
 
 void ContactInfoLine::serialize(std::vector<uint8_t>& out) const {
     out.push_back(static_cast<uint8_t>(getType()));
-    out.push_back(static_cast<uint8_t>(name.size()));
+    uint32_t name_length = static_cast<uint32_t>(name.size());
+    for (int i = 0; i < 4; i++) {
+        out.push_back(static_cast<uint8_t>(name_length >> (i * 8) & 0xFF));
+    }
     for (char c : name) {
         out.push_back(static_cast<uint8_t>(c));
     }
-    out.push_back(static_cast<uint8_t>(surname.size()));
+
+    uint32_t surname_length = static_cast<uint32_t>(surname.size());
+    for (int i = 0; i < 4; i++) {
+        out.push_back(static_cast<uint8_t>(surname_length >> (i * 8) & 0xFF));
+    }
     for (char c : surname) {
         out.push_back(static_cast<uint8_t>(c));
     }
-    out.push_back(static_cast<uint8_t>(email.size()));
+
+    uint32_t email_length = static_cast<uint32_t>(email.size());
+    for (int i = 0; i < 4; i++) {
+        out.push_back(static_cast<uint8_t>(email_length >> (i * 8) & 0xFF));
+    }
     for (char c : email) {
         out.push_back(static_cast<uint8_t>(c));
     }
