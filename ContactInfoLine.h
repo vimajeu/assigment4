@@ -7,13 +7,18 @@
 #include "Line.h"
 
 class ContactInfoLine : public Line {
-    std::string full_name;
+    std::string name;
+    std::string surname;
     std::string email;
 public:
-    ContactInfoLine(const std::string& n, std::string e) : full_name(n), email(e) {}
+    ContactInfoLine(const std::string& n, const std::string& s, const std::string& e) : name(n), surname(s), email(e) {}
     void print() const override {
-        std::cout << "Full name: " << full_name << ", E-main: " << email << std::endl;
+        std::cout << "Full name: " << name << " " << surname << ", E-main: " << email << std::endl;
     }
+    void serialize(std::vector<uint8_t>& out) const override;
+    Line* clone() const override;
+    LineType getType() const override;
+    static ContactInfoLine* deserialize(const std::vector<uint8_t>& in, size_t& offset);
 };
 
 #endif //ASSIGMENT4_CONTACTINFOLINE_H
