@@ -41,7 +41,7 @@ int Text::lines_amount() {
 
 std::string Text::get_text(int line_index, int position, int am_of_symbs) {
     if (lines[line_index]->getType() != LineType::Text) {
-        std::cout << "This command only works for text type of line.";
+        std::cout << "This command only works for text type of line." << std::endl;
         return "";
     }
     TextLine* temp = static_cast<TextLine *>(lines[line_index]);
@@ -50,7 +50,7 @@ std::string Text::get_text(int line_index, int position, int am_of_symbs) {
 
 void Text::append_textline(int line_index, std::string& app_text) {
     if (lines[line_index]->getType() != LineType::Text) {
-        std::cout << "This command only works for text type of line.";
+        std::cout << "This command only works for text type of line." << std::endl;
         return;
     }
     TextLine* t1 = static_cast<TextLine *>(lines[line_index]);
@@ -58,7 +58,7 @@ void Text::append_textline(int line_index, std::string& app_text) {
 }
 void Text::find_string_textline(int line_index, std::string& looking_for) const {
     if (lines[line_index]->getType() != LineType::Text) {
-        std::cout << "This command only works for text type of line.";
+        std::cout << "This command only works for text type of line." << std::endl;
         return;
     }
     TextLine* t1 = static_cast<TextLine *>(lines[line_index]);
@@ -66,7 +66,7 @@ void Text::find_string_textline(int line_index, std::string& looking_for) const 
 }
 void Text::insert_at_textline(int line_index, std::string& str, int position) {
     if (lines[line_index]->getType() != LineType::Text) {
-        std::cout << "This command only works for text type of line.";
+        std::cout << "This command only works for text type of line." << std::endl;
         return;
     }
     TextLine* t1 = static_cast<TextLine *>(lines[line_index]);
@@ -74,7 +74,7 @@ void Text::insert_at_textline(int line_index, std::string& str, int position) {
 }
 void Text::replace_text_textline(int line_index, std::string& str, int position) {
     if (lines[line_index]->getType() != LineType::Text) {
-        std::cout << "This command only works for text type of line.";
+        std::cout << "This command only works for text type of line." << std::endl;
         return;
     }
     TextLine* t1 = static_cast<TextLine *>(lines[line_index]);
@@ -82,7 +82,7 @@ void Text::replace_text_textline(int line_index, std::string& str, int position)
 }
 void Text::delete_text_textline(int line_index, int position, int amount_of_symbols) {
     if (lines[line_index]->getType() != LineType::Text) {
-        std::cout << "This command only works for text type of line.";
+        std::cout << "This command only works for text type of line." << std::endl;
         return;
     }
     TextLine* t1 = static_cast<TextLine *>(lines[line_index]);
@@ -91,7 +91,7 @@ void Text::delete_text_textline(int line_index, int position, int amount_of_symb
 
 void Text::copy_fragment(int line_index, int index, int count) {
     if (lines[line_index]->getType() != LineType::Text) {
-        std::cout << "This command only works for text type of line.";
+        std::cout << "This command only works for text type of line." << std::endl;
         return;
     }
     TextLine* t1 = static_cast<TextLine *>(lines[line_index]);
@@ -100,7 +100,7 @@ void Text::copy_fragment(int line_index, int index, int count) {
 
 void Text::cut_fragment(int line_index, int index, int count) {
     if (lines[line_index]->getType() != LineType::Text) {
-        std::cout << "This command only works for text type of line.";
+        std::cout << "This command only works for text type of line." << std::endl;
         return;
     }
     TextLine* t1 = static_cast<TextLine *>(lines[line_index]);
@@ -120,11 +120,11 @@ void Text::cut_line(int line_index) {
 
 void Text::paste_fragment(int line_index, int index) {
     if (lines[line_index]->getType() != LineType::Text) {
-        std::cout << "This command only works for text type of line.";
+        std::cout << "This command only works for text type of line." << std::endl;
         return;
     }
     if (text_buffer == "") {
-        std::cout << "Buffer is empty.";
+        std::cout << "Buffer is empty." << std::endl;
         return;
     }
     TextLine* t1 = static_cast<TextLine *>(lines[line_index]);
@@ -132,7 +132,7 @@ void Text::paste_fragment(int line_index, int index) {
 }
 void Text::paste_line(int line_index) {
     if (line_buffer == nullptr) {
-        std::cout << "Buffer is empty.";
+        std::cout << "Buffer is empty." << std::endl;
         return;
     }
     insert_line(line_index, line_buffer->clone());
@@ -181,6 +181,12 @@ Text::~Text() {
         delete line;
     }
     delete line_buffer;
+    for (auto c : undoStack) {
+        delete c;
+    }
+    for (auto c : redoStack) {
+        delete c;
+    }
 }
 
 void Text::execute_command(Command* c) {
@@ -193,8 +199,8 @@ void Text::execute_command(Command* c) {
 }
 
 void Text::undo() {
-    if (undoStack.size() == 0) {
-        std::cout << "No commands to undo.";
+    if (undoStack.empty()) {
+        std::cout << "No commands to undo." << std::endl;
         return;
     }
     Command* c = undoStack.back();
@@ -204,8 +210,8 @@ void Text::undo() {
 }
 
 void Text::redo() {
-    if (redoStack.size() == 0) {
-        std::cout << "No commands to redo.";
+    if (redoStack.empty()) {
+        std::cout << "No commands to redo." << std::endl;
         return;
     }
     Command* c = redoStack.back();
