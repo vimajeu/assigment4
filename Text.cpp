@@ -20,6 +20,11 @@ void Text::delete_line(int index) {
     lines.erase(lines.begin() + index);
 }
 
+void Text::replace_line(int index, Line *line) {
+    delete_line(index);
+    insert_line(index, line);
+}
+
 Line* Text::get_line_at(int index) const {
     return lines[index];
 }
@@ -28,6 +33,19 @@ void Text::print() const {
     for (auto line : lines) {
         line->print();
     }
+}
+
+int Text::lines_amount() {
+    return lines.size();
+}
+
+std::string Text::get_text(int line_index, int position, int am_of_symbs) {
+    if (lines[line_index]->getType() != LineType::Text) {
+        std::cout << "This command only works for text type of line.";
+        return "";
+    }
+    TextLine* temp = static_cast<TextLine *>(lines[line_index]);
+    return temp->copy_fragment(position, am_of_symbs);
 }
 
 void Text::append_textline(int line_index, std::string& app_text) {

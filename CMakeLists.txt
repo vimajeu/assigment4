@@ -16,4 +16,6 @@ add_executable(assigment4
         ContactInfoLine.cpp
         ContactInfoLine.h
         Text.cpp
-        Text.h)
+        Text.h
+        Command.h
+        Command.cpp)

@@ -81,3 +81,7 @@ TextLine* TextLine::deserialize(const std::vector<uint8_t>& in, size_t& offset) 
     offset += length;
     return new TextLine(data);
 }
+
+int TextLine::get_length() {
+    return text.size();
+}

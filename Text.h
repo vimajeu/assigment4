@@ -19,8 +19,12 @@ public:
     void add_line(Line* line);
     void insert_line(int index, Line* line);
     void delete_line(int index);
+    void replace_line(int index, Line* line);
+
+    std::string get_text(int line_index, int position, int am_of_symbs);
     Line* get_line_at(int index) const;
     void print() const;
+    int lines_amount();
 
     void append_textline(int line_index, std::string& app_text);
     void find_string_textline(int line_index, std::string& looking_for) const;
