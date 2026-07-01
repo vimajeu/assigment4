@@ -8,14 +8,20 @@
 #include "Line.h"
 #include <vector>
 
+#include "Command.h"
+
 class Text {
     std::vector<Line*> lines;
     std::string text_buffer = "";
     Line* line_buffer = nullptr;
-    // std::vector<Command*> undoStack;
-    // std::vector<Command*> redoStack;
+    std::vector<Command*> undoStack;
+    std::vector<Command*> redoStack;
     Line* deserialize_one(const std::vector<uint8_t>& in, size_t& offset);
 public:
+    void execute_command(Command* c);
+    void undo();
+    void redo();
+
     void add_line(Line* line);
     void insert_line(int index, Line* line);
     void delete_line(int index);

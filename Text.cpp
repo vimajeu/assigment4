@@ -182,3 +182,33 @@ Text::~Text() {
     }
     delete line_buffer;
 }
+
+void Text::execute_command(Command* c) {
+    c->redo();
+    undoStack.push_back(c);
+    for (auto command : redoStack) {
+        delete command;
+    }
+}
+
+void Text::undo() {
+    if (undoStack.size() == 0) {
+        std::cout << "No commands to undo.";
+        return;
+    }
+    Command* c = undoStack.back();
+    c->undo();
+    redoStack.push_back(c);
+    undoStack.pop_back();
+}
+
+void Text::redo() {
+    if (redoStack.size() == 0) {
+        std::cout << "No commands to redo.";
+        return;
+    }
+    Command* c = redoStack.back();
+    c->redo();
+    undoStack.push_back(c);
+    redoStack.pop_back();
+}
