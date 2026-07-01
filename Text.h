@@ -12,8 +12,7 @@
 
 class Text {
     std::vector<Line*> lines;
-    std::string text_buffer = "";
-    Line* line_buffer = nullptr;
+    std::string text_buffer;
     std::vector<Command*> undoStack;
     std::vector<Command*> redoStack;
     Line* deserialize_one(const std::vector<uint8_t>& in, size_t& offset);
@@ -25,11 +24,12 @@ public:
     void add_line(Line* line);
     void insert_line(int index, Line* line);
     void delete_line(int index);
-    void replace_line(int index, Line* line);
+    void toggle(int line_index);
+    void print() const;
 
+    std::string get_buffer();
     std::string get_text(int line_index, int position, int am_of_symbs);
     Line* get_line_at(int index) const;
-    void print() const;
     int lines_amount();
 
     void append_textline(int line_index, std::string& app_text);
@@ -40,10 +40,7 @@ public:
 
     void copy_fragment(int line_index, int index, int count);
     void cut_fragment(int line_index, int index, int count);
-    void copy_line(int line_index);
-    void cut_line(int line_index);
     void paste_fragment(int line_index, int index);
-    void paste_line(int line_index);
 
     std::vector<uint8_t> serialize() const;
     void deserialize(const std::vector<uint8_t>& in);

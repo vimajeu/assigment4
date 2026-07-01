@@ -22,7 +22,7 @@ public:
     void serialize(std::vector<uint8_t>& out) const override;
     Line* clone() const override;
     LineType getType() const override;
-    int get_length() override {
+    int get_length() const override {
         return 1;
     }
     static ChecklistLine* deserialize(const std::vector<uint8_t>& in, size_t& offset);

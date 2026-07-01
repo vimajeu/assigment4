@@ -22,7 +22,7 @@ public:
     std::string copy_fragment(int position, int count) const;
     std::string cut_fragment(int position, int count);
 
-    int get_length();
+    int get_length() const override;
     void print() const override {
         std::cout << "Text: " << text << std::endl;
     }

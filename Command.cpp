@@ -32,13 +32,11 @@ void DeleteLine::redo() {
 }
 
 void AppendTextLine::undo() {
-    int cur_line = owner->lines_amount() - 1;
-    owner->delete_text_textline(cur_line, owner->get_line_at(cur_line)->get_length() - text.size(), text.size());
+    owner->delete_text_textline(index, owner->get_line_at(index)->get_length() - text.size(), text.size());
 }
 
 void AppendTextLine::redo() {
-    int cur_line = owner->lines_amount() - 1;
-    owner->append_textline(cur_line, text);
+    owner->append_textline(index, text);
 }
 
 void InsertText::undo() {

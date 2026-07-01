@@ -54,8 +54,9 @@ public:
 class AppendTextLine : public Command {
     Text* owner;
     std::string text;
+    int index;
 public:
-    AppendTextLine(Text* o, const std::string& t) : owner(o), text(t) {
+    AppendTextLine(Text* o, const std::string& t, int p) : owner(o), text(t), index(p) {
     }
     void redo() override;
     void undo() override;

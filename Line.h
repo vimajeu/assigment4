@@ -18,7 +18,7 @@ public:
     virtual void serialize(std::vector<uint8_t>& out) const;
     virtual Line* clone() const;
     virtual LineType getType() const;
-    virtual int get_length();
+    virtual int get_length() const = 0;
     virtual ~Line() {}
 };
 

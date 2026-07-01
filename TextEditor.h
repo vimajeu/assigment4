@@ -9,23 +9,14 @@
 #include <string>
 
 #include "Line.h"
+#include "Text.h"
 
 class TextEditor {
-    std::vector<Line*> lines;
+    Text text;
+    void show_menu();
+    void handle_command(int choice);
 public:
-    void addLine(Line* line) {
-        lines.push_back(line);
-    }
-    void printAll() const {
-        for (size_t i = 0; i < lines.size(); ++i) {
-            lines[i]->print();
-        }
-    }
-    ~TextEditor() {
-        for (size_t i = 0; i < lines.size(); ++i) {
-            delete lines[i];
-        }
-    }
+    void run();
 };
 
 #endif //ASSIGMENT4_TEXTEDITOR_H

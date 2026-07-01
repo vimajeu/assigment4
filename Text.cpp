@@ -13,16 +13,19 @@ void Text::add_line(Line* line) {
 }
 
 void Text::insert_line(int index, Line* line) {
+    if (index < 0 || index > static_cast<int>(lines.size())) {
+        std::cout << "Index out of range\n" << std::endl;
+        return;
+    }
     lines.insert(lines.begin() + index, line);
 }
 
 void Text::delete_line(int index) {
+    if (index < 0 || index > static_cast<int>(lines.size())) {
+        std::cout << "Index out of range\n" << std::endl;
+        return;
+    }
     lines.erase(lines.begin() + index);
-}
-
-void Text::replace_line(int index, Line *line) {
-    delete_line(index);
-    insert_line(index, line);
 }
 
 Line* Text::get_line_at(int index) const {
@@ -51,6 +54,10 @@ std::string Text::get_text(int line_index, int position, int am_of_symbs) {
 void Text::append_textline(int line_index, std::string& app_text) {
     if (lines[line_index]->getType() != LineType::Text) {
         std::cout << "This command only works for text type of line." << std::endl;
+        return;
+    }
+    if (line_index < 0 || line_index > static_cast<int>(lines.size())) {
+        std::cout << "Index out of range\n" << std::endl;
         return;
     }
     TextLine* t1 = static_cast<TextLine *>(lines[line_index]);
@@ -107,16 +114,6 @@ void Text::cut_fragment(int line_index, int index, int count) {
     text_buffer = t1->cut_fragment(index, count);
 }
 
-void Text::copy_line(int line_index) {
-    delete line_buffer;
-    line_buffer = lines[line_index]->clone();
-}
-
-void Text::cut_line(int line_index) {
-    delete line_buffer;
-    line_buffer = lines[line_index]->clone();
-    delete_line(line_index);
-}
 
 void Text::paste_fragment(int line_index, int index) {
     if (lines[line_index]->getType() != LineType::Text) {
@@ -129,13 +126,6 @@ void Text::paste_fragment(int line_index, int index) {
     }
     TextLine* t1 = static_cast<TextLine *>(lines[line_index]);
     t1->insert_at(text_buffer, index);
-}
-void Text::paste_line(int line_index) {
-    if (line_buffer == nullptr) {
-        std::cout << "Buffer is empty." << std::endl;
-        return;
-    }
-    insert_line(line_index, line_buffer->clone());
 }
 
 std::vector<uint8_t> Text::serialize() const {
@@ -180,7 +170,6 @@ Text::~Text() {
     for (auto line : lines) {
         delete line;
     }
-    delete line_buffer;
     for (auto c : undoStack) {
         delete c;
     }
@@ -218,4 +207,17 @@ void Text::redo() {
     c->redo();
     undoStack.push_back(c);
     redoStack.pop_back();
+}
+
+void Text::toggle(int line_index) {
+    if (lines[line_index]->getType() != LineType::CheckList) {
+        std::cout << "This command only works for chechlist type of line." << std::endl;
+        return;
+    }
+    ChecklistLine* t1 = static_cast<ChecklistLine *>(lines[line_index]);
+    t1->toggle();
+}
+
+std::string Text::get_buffer() {
+    return text_buffer;
 }
