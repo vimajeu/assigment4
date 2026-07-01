@@ -14,6 +14,7 @@ class ChecklistLine : public Line {
     bool checked;
 public:
     ChecklistLine(const std::string& i, bool c) : item(i), checked(c) {}
+    ChecklistLine() = default;
     void toggle();
     void print() const override {
         std::cout << "[ " << (checked ? "x" : " ") << " ] " << item << std::endl;

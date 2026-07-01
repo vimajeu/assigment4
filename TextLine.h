@@ -13,6 +13,7 @@ class TextLine : public Line {
     std::string text;
 public:
     TextLine(const std::string& t) : text(t) {}
+    TextLine() = default;
     void append(std::string& app_text);
     void find_string(std::string& looking_for) const;
     void insert_at(std::string& str, int position);
