@@ -5,9 +5,9 @@
 #ifndef ASSIGMENT4_COMMAND_H
 #define ASSIGMENT4_COMMAND_H
 
-#include <string>
-
 #include "Text.h"
+#include <string>
+#include "Line.h"
 
 class Command {
 public:

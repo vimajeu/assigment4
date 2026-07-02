@@ -82,6 +82,6 @@ TextLine* TextLine::deserialize(const std::vector<uint8_t>& in, size_t& offset) 
     return new TextLine(data);
 }
 
-int TextLine::get_length() {
+int TextLine::get_length() const {
     return text.size();
 }

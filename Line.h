@@ -15,11 +15,11 @@ enum class LineType {
 class Line {
 public:
     virtual void print() const = 0;
-    virtual void serialize(std::vector<uint8_t>& out) const;
-    virtual Line* clone() const;
-    virtual LineType getType() const;
+    virtual void serialize(std::vector<uint8_t>& out) const = 0;
+    virtual Line* clone() const = 0;
+    virtual LineType getType() const = 0;
     virtual int get_length() const = 0;
-    virtual ~Line() {}
+    virtual ~Line();
 };
 
 #endif //ASSIGMENT4_LINE_H

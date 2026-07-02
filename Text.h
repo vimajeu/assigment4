@@ -8,8 +8,7 @@
 #include "Line.h"
 #include <vector>
 
-#include "Command.h"
-
+class Command;
 class Text {
     std::vector<Line*> lines;
     std::string text_buffer;

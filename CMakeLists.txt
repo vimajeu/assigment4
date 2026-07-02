@@ -18,4 +18,12 @@ add_executable(assigment4
         Text.cpp
         Text.h
         Command.h
-        Command.cpp)
+        Command.cpp
+        Cipher.cpp
+        Cipher.h
+        main.cpp
+        Line.cpp)
+
+if(NOT WIN32)
+    target_link_libraries(assigment4 dl)
+endif()
